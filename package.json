@@ -1,0 +1,37 @@
+{
+  "name": "analytics-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aternus/csv-to-xlsx": "^2.0.3",
+    "aspose.cells": "^22.9.0",
+    "body-parser": "^1.20.0",
+    "comma-separated-values": "^3.6.4",
+    "convert-json": "^0.5.0",
+    "cors": "^2.8.5",
+    "csv-writer": "^1.6.0",
+    "csvtoxlsxconverter": "^1.6.0",
+    "express": "^4.18.1",
+    "express-fileserver": "^0.3.4",
+    "fast-file-converter": "^1.0.7",
+    "form-pdf2json": "^0.1.6",
+    "json-2-csv": "^3.17.2",
+    "json2csv": "^5.0.7",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
+    "pdfkit": "^0.13.0",
+    "pdfmake": "^0.2.5",
+    "tsv": "^0.2.0",
+    "tsv-json": "^2.0.0",
+    "xlsx": "^0.18.5",
+    "zip-dir": "^2.0.0"
+  }
+}
