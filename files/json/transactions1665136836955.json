@@ -1,0 +1,72 @@
+[
+|{
+||"id": 1,
+||"name": "JOHNSON,AAA",
+||"designation": "ADMIN"
+|},
+|{
+||"id": 2,
+||"name": "HARDING",
+||"designation": "MANAGER"
+|},
+|{
+||"id": 3,
+||"name": "TAFT",
+||"designation": "SALES I"
+|},
+|{
+||"id": 4,
+||"name": "HOOVER",
+||"designation": "SALES I"
+|},
+|{
+||"id": 5,
+||"name": "LINCOLN",
+||"designation": "TECH"
+|},
+|{
+||"id": 6,
+||"name": "GARFIELD",
+||"designation": "MANAGER"
+|},
+|{
+||"id": 7,
+||"name": "POLK",
+||"designation": "TECH"
+|},
+|{
+||"id": 8,
+||"name": "GRANT",
+||"designation": "ENGINEER"
+|},
+|{
+||"id": 9,
+||"name": "JACKSON",
+||"designation": "CEO"
+|},
+|{
+||"id": 10,
+||"name": "FILLMORE",
+||"designation": "MANAGER"
+|},
+|{
+||"id": 11,
+||"name": "ADAMS",
+||"designation": "ENGINEER"
+|},
+|{
+||"id": 12,
+||"name": "WASHINGTON",
+||"designation": "ADMIN"
+|},
+|{
+||"id": 13,
+||"name": "MONROE",
+||"designation": "ENGINEER"
+|},
+|{
+||"id": 14,
+||"name": "ROOSEVELT",
+||"designation": "CPA"
+|}
+]

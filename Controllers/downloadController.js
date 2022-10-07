@@ -1,44 +1,9 @@
 const mysql = require("mysql");
-const fastcsv = require("fast-csv");
 const fs = require("fs");
-const { resourceLimits } = require("worker_threads");
 const { connection } = require('../connection');
 const path = require("path")
 var zipdir = require('zip-dir');
 const converter = require('json-2-csv')
-const fastFile = require("fast-file-converter").default;
-const { convertCsvToXlsx } = require('@aternus/csv-to-xlsx');
-const csvtoexcelconverter = require('csvtoxlsxconverter');
-const PDFDocument = require('pdfkit');
-const xlsx = require("xlsx");
-const doc = new PDFDocument;
-var aspose = aspose || {};
-aspose.cells = require("aspose.cells");
-var loadOptions = aspose.cells.LoadOptions(aspose.cells.FileFormatType.CSV);
-var cv2json = require('../');
-var Parser = require('tsv').Parser
-//var CSV = new Parser(",", { header: false })
-const CSV = require('./csv')
-//var csv = new CSV(data);
-const { tsv2json, json2tsv } = require('tsv-json');
-var fonts = {
-    Roboto: {
-        normal: 'fonts/Roboto-Regular.ttf',
-        bold: 'fonts/Roboto-Medium.ttf',
-        italics: 'fonts/Roboto-Italic.ttf',
-        bolditalics: 'fonts/Roboto-MediumItalic.ttf'
-    }
-};
-
-var PdfPrinter = require('../node_modules/pdfmake/src/printer');
-var printer = new PdfPrinter(fonts);
-/* const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    //database: "analytics"
-}); */
-
 
 exports.database = async (req, res, next) => {
     connection.connect(function (err) {
@@ -56,12 +21,6 @@ exports.database = async (req, res, next) => {
                     });
                 //console.log(results);
             }
-            /* for (i = 0; i < result.length; i++) {
-                  connection.query("show tables", function (err, tables, fields) {
-                      if (err) throw err;
-                      console.log(tables[i]);
-                  });
-              } */
         });
     });
 };
