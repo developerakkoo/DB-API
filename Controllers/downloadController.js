@@ -142,6 +142,7 @@ exports.downloadCsv = async (req, res, next) => {
                                     fs.writeFile(file, csv, 'utf8', function (err) {
                                         if (err) throw err;
                                         console.log('complete');
+                                       
                                     });
                                 };
                                 converter.json2csv(table, json2csvCallback, options)
@@ -155,12 +156,16 @@ exports.downloadCsv = async (req, res, next) => {
                     }
                 }
 
-                var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/csv');//change file location for live server
+                res.status(200).json({
+                    file,
+                    message: "File CSV Craed!"
+                })
+                // var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/csv');//change file location for live server
 
-                res.set('Content-Type', 'application/octet-stream');
-                res.set('Content-Disposition', `attachment; filename=files.zip`);
-                //res.set('Content-Length', folder.length);
-                res.send(buffer);
+                // res.set('Content-Type', 'application/octet-stream');
+                // res.set('Content-Disposition', `attachment; filename=files.zip`);
+                // //res.set('Content-Length', folder.length);
+                // res.send(buffer);
             });
 
 
@@ -205,6 +210,10 @@ exports.downloadPdf = async (req, res, next) => {
                                 fs.writeFile(file, data, 'utf8', function (err) {
                                     if (err) throw err;
                                     console.log('complete');
+                                    res.status(200).json({
+                                        file,
+                                        message: "File Craed!"
+                                    })
                                 });
                             });
                         }
@@ -212,10 +221,10 @@ exports.downloadPdf = async (req, res, next) => {
                 }
                 var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/pdf');//change file location for live server
 
-                res.set('Content-Type', 'application/octet-stream');
-                res.set('Content-Disposition', `attachment; filename=files.zip`);
-                //res.set('Content-Length', folder.length);
-                res.send(buffer);
+                // res.set('Content-Type', 'application/octet-stream');
+                // res.set('Content-Disposition', `attachment; filename=files.zip`);
+                // //res.set('Content-Length', folder.length);
+                // res.send(buffer);
             });
         });
     } catch (error) {
@@ -233,17 +242,24 @@ exports.downloadJson = async (req, res, next) => {
         connection.connect(function (err) {
             let query1 = "USE " + dbname;
 
+            console.log("Connect");
             connection.query(query1, function (err, result, fields) {
                 if (err) throw err;
+                console.log("query 1");
 
                 for (i = 0; i < tablename.length; i++) {
-                    if (tablename.length >= 1) {
+                console.log("query 2");
 
+                    if (tablename.length >= 1) {
+                        console.log("table length > = 1");
                         let query = "SELECT * FROM " + tablename[i];
 
                         if (result) {
+                console.log("result");
+
                             connection.query(query, function (err, table, fields) {
                                 if (err) throw err;
+                                console.log("connection quesry");
 
                                 let data = JSON.stringify(table);
                                 const jsonData = JSON.parse(data);
@@ -253,17 +269,21 @@ exports.downloadJson = async (req, res, next) => {
                                 fs.writeFile(file, data1, 'utf8', function (err) {
                                     if (err) throw err;
                                     console.log('complete');
+                                    res.status(200).json({
+                                        file,
+                                        message: "File Craed!"
+                                    })
                                 });
                             });
                         }
                     }
                 }
-                var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/json');//change file location for live server
+                // var buffer = zipdir('D:/DB-API/files/json');//change file location for live server
 
-                res.set('Content-Type', 'application/octet-stream');
-                res.set('Content-Disposition', `attachment; filename=files.zip`);
-                //res.set('Content-Length', folder.length);
-                res.send(buffer);
+                // res.set('Content-Type', 'application/octet-stream');
+                // res.set('Content-Disposition', `attachment; filename=files.zip`);
+                // //res.set('Content-Length', folder.length);
+                // res.send(buffer);
             });
         });
     } catch (error) {
@@ -308,6 +328,10 @@ exports.downloadTsv = async (req, res, next) => {
                                     fs.writeFile(file, csv, 'utf8', function (err) {
                                         if (err) throw err;
                                         console.log('complete');
+                                        res.status(200).json({
+                                            file,
+                                            message: "TSV File Craed!"
+                                        })
                                     });
                                 };
                                 converter.json2csv(table, json2csvCallback, options)
@@ -327,12 +351,12 @@ exports.downloadTsv = async (req, res, next) => {
                     }
                 }
 
-                var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/tsv');//change file location for live server
+                // var buffer = zipdir('C:/Users/Raj Gupta/DATABASE-API/files/tsv');//change file location for live server
 
-                res.set('Content-Type', 'application/octet-stream');
-                res.set('Content-Disposition', `attachment; filename=files.zip`);
-                //res.set('Content-Length', folder.length);
-                res.send(buffer);
+                // res.set('Content-Type', 'application/octet-stream');
+                // res.set('Content-Disposition', `attachment; filename=files.zip`);
+                // //res.set('Content-Length', folder.length);
+                // res.send(buffer);
             });
 
 

@@ -2,7 +2,7 @@ const express = require("express");
 const https = require("https");
 const bodyParser = require('body-parser')
 const cors = require("cors");
-
+const path = require('path')
 //Routes
 const downloadRoute = require("./Routes/downloadRoute");
 const connectionRoute = require("./Routes/connectionRoute");
@@ -13,6 +13,7 @@ const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
 app.use(express.json());
+app.use('/static', express.static(path.join(__dirname, 'files')))
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
