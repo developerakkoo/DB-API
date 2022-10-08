@@ -112,11 +112,13 @@ exports.downloadCsv = async (req, res, next) => {
         connection.connect(function (err) {
             let query1 = "USE " + dbname;
 
+            let filePaths = [];
             connection.query(query1, function (err, result, fields) {
                 if (err) throw err;
                 //console.log(tables)
                 for (i = 0; i < tablename.length; i++) {
                     if (tablename.length >= 1) {
+                        let count = tablename.length;
 
                         let query = "SELECT * FROM " + tablename[i];
 
@@ -134,22 +136,32 @@ exports.downloadCsv = async (req, res, next) => {
                                         field: separator,
                                     },
                                 };
+                               
                                 let json2csvCallback = function (err, csv) {
                                     if (err) throw err;
                                     fs.writeFile(file, csv, 'utf8', function (err) {
                                         if (err) throw err;
-                                        console.log('complete');
-                                        res.status(200).json({
-                                            file,
-                                            message: "File CSV Created!"
-                                        })
+                                        console.log('complete'+ count);
+                                        filePaths.push(file);
+                                        console.log(filePaths);
+                                        if(count == filePaths.length){
+                                            res.status(200).json({
+                                                filePaths,
+                                                message: "File CSV Created!"
+                                            })
+                                        }
                                     });
                                 };
                                 converter.json2csv(table, json2csvCallback, options)
+                                console.log("----------");
+                                console.log(filePaths);
                             });
+                            
                         }
                     }
                 }
+               
+                
             });
         });
     } catch (error) {
