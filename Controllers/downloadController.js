@@ -125,7 +125,7 @@ exports.downloadCsv = async (req, res, next) => {
                         if (result) {
                             connection.query(query, function (err, table, fields) {
                                 if (err) throw err;
-                             
+
                                 let data = JSON.stringify(table);
                                 const jsonData = JSON.parse(data);
 
@@ -136,15 +136,15 @@ exports.downloadCsv = async (req, res, next) => {
                                         field: separator,
                                     },
                                 };
-                               
+
                                 let json2csvCallback = function (err, csv) {
                                     if (err) throw err;
                                     fs.writeFile(file, csv, 'utf8', function (err) {
                                         if (err) throw err;
-                                        console.log('complete'+ count);
+                                        console.log('complete' + count);
                                         filePaths.push(file);
                                         console.log(filePaths);
-                                        if(count == filePaths.length){
+                                        if (count == filePaths.length) {
                                             res.status(200).json({
                                                 filePaths,
                                                 message: "File CSV Created!"
@@ -156,12 +156,12 @@ exports.downloadCsv = async (req, res, next) => {
                                 console.log("----------");
                                 console.log(filePaths);
                             });
-                            
+
                         }
                     }
                 }
-               
-                
+
+
             });
         });
     } catch (error) {
@@ -186,7 +186,7 @@ exports.singleCsv = async (req, res, next) => {
                 if (result) {
                     connection.query(query, function (err, table, fields) {
                         if (err) throw err;
-                   
+
                         let data = JSON.stringify(table);
                         const jsonData = JSON.parse(data);
 
@@ -228,12 +228,14 @@ exports.downloadXls = async (req, res, next) => {
         connection.connect(function (err) {
             let query1 = "USE " + dbname;
 
+            let filePaths = [];
             connection.query(query1, function (err, result, fields) {
                 if (err) throw err;
 
                 for (i = 0; i < tablename.length; i++) {
 
                     if (tablename.length >= 1) {
+                        let count = tablename.length;
                         let query = "SELECT * FROM " + tablename[i];
 
                         if (result) {
@@ -252,11 +254,15 @@ exports.downloadXls = async (req, res, next) => {
                                 fs.writeFile(file, xls, 'binary', function (err) {
                                     if (err) throw err;
                                     console.log('complete');
-                                    //res.send(file)
-                                    res.status(200).json({
-                                        file,
-                                        message: "File Created!"
-                                    })
+                                    filePaths.push(file);
+                                    console.log(filePaths);
+                                    if (count == filePaths.length) {
+                                        res.status(200).json({
+                                            filePaths,
+                                            message: "File CSV Created!"
+                                        })
+                                    }
+
                                 });
                             });
                         }
@@ -303,7 +309,7 @@ exports.singleXls = async (req, res, next) => {
                         fs.writeFile(file, xls, 'binary', function (err) {
                             if (err) throw err;
                             console.log('complete');
-            
+
                             // let url=req.protocol + '://' + req.hostname + '/' + file
                             res.status(200).json({
                                 file,
@@ -329,7 +335,7 @@ exports.downloadJson = async (req, res, next) => {
         connection.connect(function (err) {
             let query1 = "USE " + dbname;
 
-            console.log("Connect");
+            let filePaths = [];
             connection.query(query1, function (err, result, fields) {
                 if (err) throw err;
                 console.log("query 1");
@@ -338,6 +344,8 @@ exports.downloadJson = async (req, res, next) => {
                     console.log("query 2");
 
                     if (tablename.length >= 1) {
+                        let count = tablename.length;
+
                         console.log("table length > = 1");
                         let query = "SELECT * FROM " + tablename[i];
 
@@ -357,11 +365,14 @@ exports.downloadJson = async (req, res, next) => {
                                 fs.writeFile(file, data1, 'utf8', function (err) {
                                     if (err) throw err;
                                     console.log('complete');
-                                    //res.send(file)
-                                    res.status(200).json({
-                                        file,
-                                        message: "File Craed!"
-                                    })
+                                    filePaths.push(file);
+                                    console.log(filePaths);
+                                    if (count == filePaths.length) {
+                                        res.status(200).json({
+                                            filePaths,
+                                            message: "File CSV Created!"
+                                        })
+                                    }
                                 });
                             });
                         }
@@ -428,11 +439,13 @@ exports.downloadTsv = async (req, res, next) => {
         connection.connect(function (err) {
             let query1 = "USE " + dbname;
 
+            let filePaths = [];
             connection.query(query1, function (err, result, fields) {
                 if (err) throw err;
 
                 for (i = 0; i < tablename.length; i++) {
                     if (tablename.length >= 1) {
+                        let count = tablename.length;
 
                         let query = "SELECT * FROM " + tablename[i];
                         if (result) {
@@ -454,10 +467,14 @@ exports.downloadTsv = async (req, res, next) => {
                                     fs.writeFile(file, csv, 'utf8', function (err) {
                                         if (err) throw err;
                                         console.log('complete');
-                                        res.status(200).json({
-                                            file,
-                                            message: "TSV File Craed!"
-                                        })
+                                        filePaths.push(file);
+                                        console.log(filePaths);
+                                        if (count == filePaths.length) {
+                                            res.status(200).json({
+                                                filePaths,
+                                                message: "File CSV Created!"
+                                            })
+                                        }
                                     });
                                 };
                                 converter.json2csv(table, json2csvCallback, options)
